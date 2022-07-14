@@ -1,5 +1,6 @@
 // Importing required modules
-
+require("dotenv").config();
+process.env.SECRET;
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -24,9 +25,10 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
-const secret = "ashusharma";
-
-userSchema.plugin(encrypt, { secret: secret, encryptedFields: ["password"] });
+userSchema.plugin(encrypt, {
+  secret: process.env.SECRET,
+  encryptedFields: ["password"],
+});
 
 // Modeling User
 
